@@ -63,4 +63,11 @@ extension MenuBar: UICollectionViewDataSource {
 
 extension MenuBar: UICollectionViewDelegateFlowLayout {
   
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return .init(width: self.frame.width / 4, height: self.frame.height)
+  }
 }
