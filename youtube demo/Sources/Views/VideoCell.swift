@@ -12,6 +12,10 @@ final class VideoCell: UICollectionViewCell {
   
   // MARK: Cosntants
   
+  private struct Font {
+    static let titleLabel = UIFont.systemFont(ofSize: 16)
+  }
+  
   private struct Metric {
     static let thumbnailImageViewMargin = 16.f
     
@@ -48,6 +52,8 @@ final class VideoCell: UICollectionViewCell {
   }
   private let titleLabel = UILabel().then {
     $0.text = "Taylor Swift - Blank Space"
+    $0.font = Font.titleLabel
+    $0.numberOfLines = 2
   }
   private let subtitleTextView = UITextView().then {
     $0.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years"
@@ -103,5 +109,27 @@ final class VideoCell: UICollectionViewCell {
       make.left.right.bottom.equalToSuperview()
       make.height.equalTo(1)
     }
+  }
+  
+  // MARK: Size
+  
+  class func size(width: CGFloat, title: String) -> CGSize {
+    var height: CGFloat = 0
+    
+    let titleLabelHeight = title.size(
+      width: width - Metric.userProfileImageViewSize - Metric.titleLabelLeft - Metric.thumbnailImageViewMargin * 2,
+      font: Font.titleLabel
+    ).height
+    let thumbnailImageViewHeight = (width - Metric.thumbnailImageViewMargin * 2) * CGFloat(Constant.videoRatio)
+    
+    height += Metric.thumbnailImageViewMargin
+    height += thumbnailImageViewHeight
+    height += Metric.titleLabelTop
+    height += max(titleLabelHeight, Metric.titleLabelHeight)
+    height += Metric.subtitleTextViewTop
+    height += Metric.subtitleTextViewHeight
+    height += Metric.subtitleTextViewBottom
+    
+    return .init(width: width, height: height)
   }
 }
