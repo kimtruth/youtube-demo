@@ -35,18 +35,21 @@ final class VideoCell: UICollectionViewCell {
   // MARK: UI
   
   private let thumbnailImageView = UIImageView().then {
+    $0.image = UIImage(named: "taylor_swift_blank_space")
     $0.backgroundColor = .blue
+    $0.contentMode = .scaleAspectFill
   }
   private let userProfileImageView = UIImageView().then {
+    $0.image = UIImage(named: "taylor_swift_profile")
     $0.backgroundColor = .green
+    $0.contentMode = .scaleAspectFill
   }
   private let titleLabel = UILabel().then {
-    $0.text = "Title"
-    $0.backgroundColor = .red
+    $0.text = "Taylor Swift - Blank Space"
   }
   private let subtitleTextView = UITextView().then {
-    $0.text = "subTitle"
-    $0.backgroundColor = .purple
+    $0.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years"
+    $0.textColor = .lightGray
     $0.textContainer.lineFragmentPadding = 0
     $0.textContainerInset = .init(top: 0, left: 0, bottom: 0, right: 0)
   }
