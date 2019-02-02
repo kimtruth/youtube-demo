@@ -26,7 +26,7 @@ final class MenuBar: UIView {
     $0.delegate = self
   }
   
-  // MARK: View Life Cycles
+  // MARK: Initializing
   
   override init(frame: CGRect) {
     super.init(frame: frame)

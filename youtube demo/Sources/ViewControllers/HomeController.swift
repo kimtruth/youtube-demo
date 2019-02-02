@@ -64,6 +64,8 @@ final class HomeController: UICollectionViewController {
   private func setupCollectionView() {
     self.collectionView.backgroundColor = .white
     self.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: self.cellId)
+    self.collectionView.contentInset = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
+    self.collectionView.scrollIndicatorInsets = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
   }
 
 }
