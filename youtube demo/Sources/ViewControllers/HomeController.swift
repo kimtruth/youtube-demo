@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeController.swift
 //  youtube demo
 //
 //  Created by truth on 2019. 2. 2..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeController: UICollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()

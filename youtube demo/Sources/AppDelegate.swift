@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let window = UIWindow(frame: UIScreen.main.bounds)
     window.makeKeyAndVisible()
     
-    window.rootViewController = ViewController()
+    let layout = UICollectionViewFlowLayout()
+    let homeController = HomeController(collectionViewLayout: layout)
+    window.rootViewController = homeController
     
     self.window = window
     
