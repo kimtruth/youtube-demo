@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     navigationController.navigationBar.barStyle = .black
     navigationController.navigationBar.barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
     navigationController.navigationBar.isTranslucent = false
+    navigationController.navigationBar.shadowImage = UIImage()
+    navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
     
     window.makeKeyAndVisible()
     window.rootViewController = navigationController
