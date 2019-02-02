@@ -47,6 +47,8 @@ final class VideoCell: UICollectionViewCell {
   private let subtitleTextView = UITextView().then {
     $0.text = "subTitle"
     $0.backgroundColor = .purple
+    $0.textContainer.lineFragmentPadding = 0
+    $0.textContainerInset = .init(top: 0, left: 0, bottom: 0, right: 0)
   }
   private let separatorView = UIView().then {
     $0.backgroundColor = .gray
