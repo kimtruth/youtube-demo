@@ -10,6 +10,19 @@ import UIKit
 
 final class MenuCell: BaseCell {
   
+  // MARK: Properties
+  
+  override var isHighlighted: Bool {
+    didSet {
+      self.imageView.tintColor = isHighlighted ? Color.imageViewHighlightTint : Color.imageViewDefaultTint
+    }
+  }
+  override var isSelected: Bool {
+    didSet {
+      self.imageView.tintColor = isSelected ? Color.imageViewHighlightTint : Color.imageViewDefaultTint
+    }
+  }
+  
   // MARK: Constants
   
   private struct Color {
@@ -24,7 +37,6 @@ final class MenuCell: BaseCell {
   // MARK: UI
   
   let imageView = UIImageView().then {
-    $0.image = UIImage(named: "home")
     $0.tintColor = Color.imageViewDefaultTint
   }
   

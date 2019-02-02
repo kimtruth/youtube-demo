@@ -36,6 +36,10 @@ final class MenuBar: UIView {
     self.collectionView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
+    
+    /// default page: home
+    let selectedIndexPath = IndexPath(item: 0, section: 0)
+    self.collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .bottom)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -54,7 +58,8 @@ extension MenuBar: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! MenuCell
-    cell.imageView.image = UIImage(named: self.imageNames[indexPath.item])
+    let image = UIImage(named: self.imageNames[indexPath.item])
+    cell.imageView.image = image?.withRenderingMode(.alwaysTemplate)
     
     return cell
   }
