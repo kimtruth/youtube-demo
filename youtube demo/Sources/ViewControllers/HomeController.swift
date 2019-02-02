@@ -13,6 +13,7 @@ final class HomeController: UICollectionViewController {
   // MARK: Properties
   
   private let cellId = "VideoCell"
+  private let settingLauncher = SettingLauncher()
   private var videos: [Video]?
   
   // MARK: UI
@@ -71,10 +72,10 @@ final class HomeController: UICollectionViewController {
       image: moreImage,
       style: .plain,
       target: self,
-      action: #selector(self.searchButtonDidTap)
+      action: #selector(self.moreButtonDidTap)
     )
     
-    self.navigationItem.rightBarButtonItems = [searchButtonItem, moreButtonItem]
+    self.navigationItem.rightBarButtonItems = [moreButtonItem, searchButtonItem]
   }
   
   private func setupMenuBar() {
@@ -124,7 +125,7 @@ final class HomeController: UICollectionViewController {
   }
   
   @objc private func moreButtonDidTap() {
-    
+    self.settingLauncher.showSettings()
   }
   
 }
