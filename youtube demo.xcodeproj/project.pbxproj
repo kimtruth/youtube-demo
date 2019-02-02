@@ -122,8 +122,8 @@
 		98D8227322054A8C00B9E4F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				98D8227422054A9800B9E4F3 /* VideoCell.swift */,
 				98D8227B22055EC200B9E4F3 /* MenuBar.swift */,
+				98D8227422054A9800B9E4F3 /* VideoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

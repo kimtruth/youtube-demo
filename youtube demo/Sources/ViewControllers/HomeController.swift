@@ -12,12 +12,20 @@ final class HomeController: UICollectionViewController {
 
   // MARK: Properties
   
-  let cellId = "VideoCell"
+  private let cellId = "VideoCell"
+  
+  // MARK: UI
+  
+  private let menubar = MenuBar()
   
   // MARK: Constants
   
   private struct Font {
     static let titleLabel = UIFont.boldSystemFont(ofSize: 20)
+  }
+  
+  private struct Metric {
+    static let menuBarHeight = 50.f
   }
   
   // MARK: View Life Cycles
@@ -26,6 +34,7 @@ final class HomeController: UICollectionViewController {
     super.viewDidLoad()
     
     self.setupNavBar()
+    self.setupMenuBar()
     self.setupCollectionView()
   }
   
@@ -42,6 +51,14 @@ final class HomeController: UICollectionViewController {
       $0.textColor = .white
     }
     self.navigationItem.titleView = titleLabel
+  }
+  
+  private func setupMenuBar() {
+    self.view.addSubview(self.menubar)
+    self.menubar.snp.makeConstraints { (make) in
+      make.top.width.equalToSuperview()
+      make.height.equalTo(Metric.menuBarHeight)
+    }
   }
   
   private func setupCollectionView() {

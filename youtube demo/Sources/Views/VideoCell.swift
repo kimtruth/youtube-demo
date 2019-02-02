@@ -78,7 +78,7 @@ final class VideoCell: UICollectionViewCell {
   
   // MARK: Setups
   
-  func setupViews() {
+  private func setupViews() {
     self.addSubview(self.thumbnailImageView)
     self.addSubview(self.userProfileImageView)
     self.addSubview(self.titleLabel)
