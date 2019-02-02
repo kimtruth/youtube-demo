@@ -16,6 +16,7 @@
 		98D8227A220554C600B9E4F3 /* UIColor+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D82279220554C600B9E4F3 /* UIColor+rgb.swift */; };
 		98D8227C22055EC200B9E4F3 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8227B22055EC200B9E4F3 /* MenuBar.swift */; };
 		98D8227E2205625600B9E4F3 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8227D2205625600B9E4F3 /* MenuCell.swift */; };
+		98D822802205628400B9E4F3 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8227F2205628400B9E4F3 /* BaseCell.swift */; };
 		F7E67CEB6D210B82936F3C93 /* Pods_youtube_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77870F88794B2562D9AAEF16 /* Pods_youtube_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		98D82279220554C600B9E4F3 /* UIColor+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+rgb.swift"; sourceTree = "<group>"; };
 		98D8227B22055EC200B9E4F3 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		98D8227D2205625600B9E4F3 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		98D8227F2205628400B9E4F3 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		A30C7448C3FC0A14DC5EAFFB /* Pods-youtube demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-youtube demo/Pods-youtube demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				98D8227B22055EC200B9E4F3 /* MenuBar.swift */,
+				98D8227F2205628400B9E4F3 /* BaseCell.swift */,
 				98D8227D2205625600B9E4F3 /* MenuCell.swift */,
 				98D8227422054A9800B9E4F3 /* VideoCell.swift */,
 			);
@@ -267,6 +270,7 @@
 				98D822612205404B00B9E4F3 /* HomeController.swift in Sources */,
 				98D8225F2205404B00B9E4F3 /* AppDelegate.swift in Sources */,
 				98D8227C22055EC200B9E4F3 /* MenuBar.swift in Sources */,
+				98D822802205628400B9E4F3 /* BaseCell.swift in Sources */,
 				98D8227A220554C600B9E4F3 /* UIColor+rgb.swift in Sources */,
 				98D822782205531E00B9E4F3 /* String+BoundingRect.swift in Sources */,
 				98D8227522054A9800B9E4F3 /* VideoCell.swift in Sources */,
