@@ -10,12 +10,44 @@ import UIKit
 
 final class VideoCell: UICollectionViewCell {
   
+  // MARK: Cosntants
+  
+  private struct Metric {
+    static let thumbnailImageViewMargin = 16.f
+    
+    static let userProfileImageViewTop = 8.f
+    static let userProfileImageViewLeftBottom = 16.f
+    static let userProfileImageViewSize = 44.f
+    
+    static let titleLabelLeft = 8.f
+    static let titleLabelTop = 8.f
+    static let titleLabelHeight = 20.f
+    
+    static let subtitleTextViewTop = 8.f
+    static let subtitleTextViewHeight = 30.f
+    static let subtitleTextViewBottom = 8.f
+  }
+  
+  private struct Constant {
+    static let videoRatio = 9.0 / 16
+  }
+  
   // MARK: UI
   
   private let thumbnailImageView = UIImageView().then {
     $0.backgroundColor = .blue
   }
-  
+  private let userProfileImageView = UIImageView().then {
+    $0.backgroundColor = .green
+  }
+  private let titleLabel = UILabel().then {
+    $0.text = "Title"
+    $0.backgroundColor = .red
+  }
+  private let subtitleTextView = UITextView().then {
+    $0.text = "subTitle"
+    $0.backgroundColor = .purple
+  }
   private let separatorView = UIView().then {
     $0.backgroundColor = .gray
   }
@@ -35,10 +67,30 @@ final class VideoCell: UICollectionViewCell {
   
   func setupViews() {
     self.addSubview(self.thumbnailImageView)
+    self.addSubview(self.userProfileImageView)
+    self.addSubview(self.titleLabel)
+    self.addSubview(self.subtitleTextView)
     self.addSubview(self.separatorView)
     
     self.thumbnailImageView.snp.makeConstraints { (make) in
-      make.edges.equalToSuperview().inset(16)
+      make.top.left.right.equalToSuperview().inset(Metric.thumbnailImageViewMargin)
+      make.height.equalTo(self.thumbnailImageView.snp.width).multipliedBy(Constant.videoRatio)
+    }
+    self.userProfileImageView.snp.makeConstraints { (make) in
+      make.top.equalTo(self.thumbnailImageView.snp.bottom).offset(Metric.userProfileImageViewTop)
+      make.left.equalToSuperview().inset(Metric.userProfileImageViewLeftBottom)
+      make.width.height.equalTo(Metric.userProfileImageViewSize)
+    }
+    self.titleLabel.snp.makeConstraints { (make) in
+      make.top.equalTo(self.thumbnailImageView.snp.bottom).offset(Metric.titleLabelTop)
+      make.left.equalTo(self.userProfileImageView.snp.right).offset(Metric.titleLabelLeft)
+      make.right.equalTo(self.thumbnailImageView.snp.right)
+    }
+    self.subtitleTextView.snp.makeConstraints { (make) in
+      make.top.equalTo(self.titleLabel.snp.bottom).offset(Metric.subtitleTextViewTop)
+      make.left.equalTo(self.titleLabel.snp.left)
+      make.right.equalTo(self.thumbnailImageView.snp.right)
+      make.bottom.equalToSuperview().offset(-Metric.subtitleTextViewBottom)
     }
     self.separatorView.snp.makeConstraints { (make) in
       make.left.right.bottom.equalToSuperview()
