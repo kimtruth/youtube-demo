@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let homeController = HomeController(collectionViewLayout: layout)
     let navigationController = UINavigationController(rootViewController: homeController)
     
+    navigationController.navigationBar.barStyle = .black
+    navigationController.navigationBar.barTintColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+    navigationController.navigationBar.isTranslucent = false
+    
     window.makeKeyAndVisible()
     window.rootViewController = navigationController
     
