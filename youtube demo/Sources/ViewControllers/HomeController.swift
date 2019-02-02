@@ -14,15 +14,37 @@ final class HomeController: UICollectionViewController {
   
   let cellId = "VideoCell"
   
+  // MARK: Constants
+  
+  private struct Font {
+    static let titleLabel = UIFont.boldSystemFont(ofSize: 20)
+  }
+  
   // MARK: View Life Cycles
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.setupNavBar()
+    self.setupCollectionView()
+  }
+  
+  // MARK: Setups
+  
+  private func setupNavBar() {
     let title = "Home"
-    
     self.navigationItem.title = title
     
+    let titleLabel = UILabel().then {
+      $0.font = Font.titleLabel
+      $0.frame = .init(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height)
+      $0.text = title
+      $0.textColor = .white
+    }
+    self.navigationItem.titleView = titleLabel
+  }
+  
+  private func setupCollectionView() {
     self.collectionView.backgroundColor = .white
     self.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: self.cellId)
   }
