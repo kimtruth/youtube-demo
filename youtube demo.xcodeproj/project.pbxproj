@@ -13,6 +13,7 @@
 		98D822692205404D00B9E4F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98D822672205404D00B9E4F3 /* LaunchScreen.storyboard */; };
 		98D8227522054A9800B9E4F3 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8227422054A9800B9E4F3 /* VideoCell.swift */; };
 		98D822782205531E00B9E4F3 /* String+BoundingRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D822772205531E00B9E4F3 /* String+BoundingRect.swift */; };
+		98D8227A220554C600B9E4F3 /* UIColor+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D82279220554C600B9E4F3 /* UIColor+rgb.swift */; };
 		F7E67CEB6D210B82936F3C93 /* Pods_youtube_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77870F88794B2562D9AAEF16 /* Pods_youtube_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		98D8226A2205404D00B9E4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98D8227422054A9800B9E4F3 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		98D822772205531E00B9E4F3 /* String+BoundingRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+BoundingRect.swift"; sourceTree = "<group>"; };
+		98D82279220554C600B9E4F3 /* UIColor+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+rgb.swift"; sourceTree = "<group>"; };
 		A30C7448C3FC0A14DC5EAFFB /* Pods-youtube demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-youtube demo/Pods-youtube demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				98D822772205531E00B9E4F3 /* String+BoundingRect.swift */,
+				98D82279220554C600B9E4F3 /* UIColor+rgb.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 			files = (
 				98D822612205404B00B9E4F3 /* HomeController.swift in Sources */,
 				98D8225F2205404B00B9E4F3 /* AppDelegate.swift in Sources */,
+				98D8227A220554C600B9E4F3 /* UIColor+rgb.swift in Sources */,
 				98D822782205531E00B9E4F3 /* String+BoundingRect.swift in Sources */,
 				98D8227522054A9800B9E4F3 /* VideoCell.swift in Sources */,
 			);
