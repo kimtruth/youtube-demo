@@ -19,6 +19,10 @@ final class HomeController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let title = "Home"
+    
+    self.navigationItem.title = title
+    
     self.collectionView.backgroundColor = .white
     self.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: self.cellId)
   }
