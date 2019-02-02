@@ -13,6 +13,7 @@ final class MenuBar: UIView {
   // MARK: Properties
   
   private let cellId = "MenuCell"
+  private let imageNames = ["home", "trending", "subscriptions", "account"]
   
   // MARK: UI
   
@@ -31,7 +32,7 @@ final class MenuBar: UIView {
     super.init(frame: frame)
     
     self.addSubview(self.collectionView)
-    self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellId)
+    self.collectionView.register(MenuCell.self, forCellWithReuseIdentifier: self.cellId)
     self.collectionView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview()
     }
@@ -48,12 +49,12 @@ final class MenuBar: UIView {
 extension MenuBar: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 4
+    return self.imageNames.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath)
-    cell.backgroundColor = .white
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! MenuCell
+    cell.imageView.image = UIImage(named: self.imageNames[indexPath.item])
     
     return cell
   }
@@ -68,6 +69,7 @@ extension MenuBar: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: self.frame.width / 4, height: self.frame.height)
+    let width = self.frame.width / CGFloat(self.imageNames.count)
+    return .init(width: width, height: self.frame.height)
   }
 }
