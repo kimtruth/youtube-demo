@@ -139,7 +139,9 @@ extension HomeController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! VideoCell
-    
+    if let video = self.videos?[indexPath.item] {
+      cell.configure(video: video)
+    }
     return cell
   }
 }

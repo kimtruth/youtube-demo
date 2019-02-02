@@ -10,7 +10,11 @@ import UIKit
 
 final class VideoCell: BaseCell {
   
-  // MARK: Cosntants
+  // MARK: Properties
+  
+  private var video: Video?
+  
+  // MARK: Constants
   
   private struct Font {
     static let titleLabel = UIFont.systemFont(ofSize: 16)
@@ -99,6 +103,20 @@ final class VideoCell: BaseCell {
     self.separatorView.snp.makeConstraints { (make) in
       make.left.right.bottom.equalToSuperview()
       make.height.equalTo(1)
+    }
+  }
+  
+  // MARK: Configuring
+  
+  func configure(video: Video) {
+    self.video = video
+    
+    self.titleLabel.text = self.video?.title
+    if let channelName = self.video?.channel.name,
+      let numberOfViews = self.video?.numberOfViews {
+      
+      let subtitleText = "\(channelName) • \(numberOfViews.delimiter) Views • 2 years ago"
+      self.subtitleTextView.text = subtitleText
     }
   }
   
