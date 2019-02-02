@@ -13,6 +13,7 @@ final class HomeController: UICollectionViewController {
   // MARK: Properties
   
   private let cellId = "VideoCell"
+  private var videos: [Video]?
   
   // MARK: UI
   
@@ -32,6 +33,8 @@ final class HomeController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.fetchVideos()
     
     self.setupNavBar()
     self.setupNavBarButtons()
@@ -88,6 +91,31 @@ final class HomeController: UICollectionViewController {
     self.collectionView.contentInset = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
     self.collectionView.scrollIndicatorInsets = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
   }
+  
+  // MARK: Networking
+  
+  private func fetchVideos() {
+    let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
+    guard let url = URL(string: urlString) else { return }
+    
+    URLSession.shared.dataTask(with: url) { (data, res, err) in
+      guard let data = data else { return }
+      
+      let decoder = JSONDecoder()
+      decoder.keyDecodingStrategy = .convertFromSnakeCase
+      do {
+        let videos = try decoder.decode([Video].self, from: data)
+        print(videos)
+        
+        self.videos = videos
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
+      } catch let jsonErr {
+        print("json decode error:", jsonErr)
+      }
+    }.resume()
+  }
 
   // MARK: Actions
   
@@ -106,7 +134,7 @@ final class HomeController: UICollectionViewController {
 extension HomeController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return self.videos?.count ?? 0
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
