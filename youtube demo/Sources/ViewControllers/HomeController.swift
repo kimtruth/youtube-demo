@@ -34,6 +34,7 @@ final class HomeController: UICollectionViewController {
     super.viewDidLoad()
     
     self.setupNavBar()
+    self.setupNavBarButtons()
     self.setupMenuBar()
     self.setupCollectionView()
   }
@@ -53,6 +54,26 @@ final class HomeController: UICollectionViewController {
     self.navigationItem.titleView = titleLabel
   }
   
+  private func setupNavBarButtons() {
+    let searchImage =  UIImage(named: "search_icon")?.withRenderingMode(.alwaysOriginal)
+    let searchButtonItem = UIBarButtonItem(
+      image: searchImage,
+      style: .plain,
+      target: self,
+      action: #selector(self.searchButtonDidTap)
+    )
+    
+    let moreImage =  UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal)
+    let moreButtonItem = UIBarButtonItem(
+      image: moreImage,
+      style: .plain,
+      target: self,
+      action: #selector(self.searchButtonDidTap)
+    )
+    
+    self.navigationItem.rightBarButtonItems = [searchButtonItem, moreButtonItem]
+  }
+  
   private func setupMenuBar() {
     self.view.addSubview(self.menubar)
     self.menubar.snp.makeConstraints { (make) in
@@ -68,6 +89,16 @@ final class HomeController: UICollectionViewController {
     self.collectionView.scrollIndicatorInsets = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
   }
 
+  // MARK: Actions
+  
+  @objc private func searchButtonDidTap() {
+    
+  }
+  
+  @objc private func moreButtonDidTap() {
+    
+  }
+  
 }
 
 // MARK: - UICollectionViewDataSource
