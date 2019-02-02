@@ -16,6 +16,10 @@ final class VideoCell: UICollectionViewCell {
     $0.backgroundColor = .blue
   }
   
+  private let separatorView = UIView().then {
+    $0.backgroundColor = .gray
+  }
+  
   // MARK: Initializing
   
   override init(frame: CGRect) {
@@ -31,9 +35,14 @@ final class VideoCell: UICollectionViewCell {
   
   func setupViews() {
     self.addSubview(self.thumbnailImageView)
+    self.addSubview(self.separatorView)
     
     self.thumbnailImageView.snp.makeConstraints { (make) in
       make.edges.equalToSuperview().inset(16)
+    }
+    self.separatorView.snp.makeConstraints { (make) in
+      make.left.right.bottom.equalToSuperview()
+      make.height.equalTo(1)
     }
   }
 }
