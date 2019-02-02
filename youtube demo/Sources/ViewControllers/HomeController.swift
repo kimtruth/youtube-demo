@@ -20,7 +20,7 @@ final class HomeController: UICollectionViewController {
     super.viewDidLoad()
     
     self.collectionView.backgroundColor = .white
-    self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellId)
+    self.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: self.cellId)
   }
 
 }
@@ -34,8 +34,7 @@ extension HomeController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath)
-    cell.backgroundColor = .red
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! VideoCell
     
     return cell
   }
