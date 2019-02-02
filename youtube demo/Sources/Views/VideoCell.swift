@@ -42,12 +42,12 @@ final class VideoCell: BaseCell {
   
   // MARK: UI
   
-  private let thumbnailImageView = UIImageView().then {
+  private let thumbnailImageView = CustomImageView().then {
     $0.image = UIImage(named: "taylor_swift_blank_space")
     $0.backgroundColor = .blue
     $0.contentMode = .scaleAspectFill
   }
-  private let userProfileImageView = UIImageView().then {
+  private let userProfileImageView = CustomImageView().then {
     $0.image = UIImage(named: "taylor_swift_profile")
     $0.backgroundColor = .green
     $0.contentMode = .scaleAspectFill
@@ -118,6 +118,8 @@ final class VideoCell: BaseCell {
       let subtitleText = "\(channelName) • \(numberOfViews.delimiter) Views • 2 years ago"
       self.subtitleTextView.text = subtitleText
     }
+    self.thumbnailImageView.setImage(with: self.video?.thumbnailImageName ?? "")
+    self.userProfileImageView.setImage(with: self.video?.channel.profileImageName ?? "")
   }
   
   // MARK: Size
