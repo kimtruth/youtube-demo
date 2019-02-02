@@ -12,4 +12,5 @@ struct Video: Decodable {
   var thumbnailImageName: String
   var title: String
   var numberOfViews: Int
+  var channel: Channel
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Channel {
+struct Channel: Decodable {
   var name: String
   var profileImageName: String
 }
