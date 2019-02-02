@@ -8,12 +8,9 @@
 
 import UIKit
 
-final class MenuCell: UICollectionViewCell {
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
+final class MenuCell: BaseCell {
   
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  override func setupViews() {
+    super.setupViews()
   }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class VideoCell: UICollectionViewCell {
+final class VideoCell: BaseCell {
   
   // MARK: Cosntants
   
@@ -65,20 +65,11 @@ final class VideoCell: UICollectionViewCell {
     $0.backgroundColor = .gray
   }
   
-  // MARK: Initializing
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    self.setupViews()
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
   // MARK: Setups
   
-  private func setupViews() {
+  override func setupViews() {
+    super.setupViews()
+    
     self.addSubview(self.thumbnailImageView)
     self.addSubview(self.userProfileImageView)
     self.addSubview(self.titleLabel)
