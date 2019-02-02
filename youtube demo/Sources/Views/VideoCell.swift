@@ -43,6 +43,8 @@ final class VideoCell: UICollectionViewCell {
     $0.image = UIImage(named: "taylor_swift_profile")
     $0.backgroundColor = .green
     $0.contentMode = .scaleAspectFill
+    $0.layer.masksToBounds = true
+    $0.layer.cornerRadius = Metric.userProfileImageViewSize / 2
   }
   private let titleLabel = UILabel().then {
     $0.text = "Taylor Swift - Blank Space"
