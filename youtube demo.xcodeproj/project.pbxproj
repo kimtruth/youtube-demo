@@ -20,6 +20,7 @@
 		98D8228322056A5C00B9E4F3 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8228222056A5C00B9E4F3 /* Video.swift */; };
 		98D8228522056C9300B9E4F3 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8228422056C9300B9E4F3 /* Channel.swift */; };
 		98D822882205768E00B9E4F3 /* Int+delimiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D822872205768E00B9E4F3 /* Int+delimiter.swift */; };
+		98D8228A2205771B00B9E4F3 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D822892205771B00B9E4F3 /* CustomImageView.swift */; };
 		F7E67CEB6D210B82936F3C93 /* Pods_youtube_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77870F88794B2562D9AAEF16 /* Pods_youtube_demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		98D8228222056A5C00B9E4F3 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		98D8228422056C9300B9E4F3 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		98D822872205768E00B9E4F3 /* Int+delimiter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+delimiter.swift"; sourceTree = "<group>"; };
+		98D822892205771B00B9E4F3 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		A30C7448C3FC0A14DC5EAFFB /* Pods-youtube demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtube demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-youtube demo/Pods-youtube demo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 				98D8227F2205628400B9E4F3 /* BaseCell.swift */,
 				98D8227D2205625600B9E4F3 /* MenuCell.swift */,
 				98D8227422054A9800B9E4F3 /* VideoCell.swift */,
+				98D822892205771B00B9E4F3 /* CustomImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				98D8227E2205625600B9E4F3 /* MenuCell.swift in Sources */,
+				98D8228A2205771B00B9E4F3 /* CustomImageView.swift in Sources */,
 				98D8228522056C9300B9E4F3 /* Channel.swift in Sources */,
 				98D822612205404B00B9E4F3 /* HomeController.swift in Sources */,
 				98D8225F2205404B00B9E4F3 /* AppDelegate.swift in Sources */,
