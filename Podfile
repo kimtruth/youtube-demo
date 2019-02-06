@@ -9,5 +9,6 @@ target 'youtube demo' do
   #Misc
   pod 'Then', '~> 2.4'
   pod 'CGFloatLiteral'
+  pod 'Reveal-SDK', :configurations => ['Debug']
 
 end
