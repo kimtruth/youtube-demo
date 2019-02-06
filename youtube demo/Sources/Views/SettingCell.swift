@@ -10,13 +10,23 @@ import UIKit
 
 final class SettingCell: BaseCell {
   
+  // MARK: Properties
+  
+  override var isHighlighted: Bool {
+    didSet {
+      self.backgroundColor = self.isHighlighted ? .darkGray : .white
+      self.nameLabel.textColor = self.isHighlighted ? .white : .black
+      self.iconImageView.tintColor = self.isHighlighted ? .white : .darkGray
+    }
+  }
+  
   // MARK: Constants
   
-  struct Font {
+  private struct Font {
     static let nameLabel = UIFont.systemFont(ofSize: 13)
   }
   
-  struct Metric {
+  private struct Metric {
     static let iconImageViewInset = 8.f
   }
   
@@ -28,6 +38,7 @@ final class SettingCell: BaseCell {
   }
   private let iconImageView = UIImageView().then {
     $0.image = UIImage(named: "settings")
+    $0.tintColor = .darkGray
   }
   
   // MARK: Setups
@@ -37,7 +48,6 @@ final class SettingCell: BaseCell {
     
     self.addSubview(self.nameLabel)
     self.addSubview(self.iconImageView)
-    
     
     self.nameLabel.snp.makeConstraints { (make) in
       make.left.equalTo(self.iconImageView.snp.right).offset(Metric.iconImageViewInset)
@@ -53,7 +63,7 @@ final class SettingCell: BaseCell {
   
   func configure(setting: Setting) {
     self.nameLabel.text = setting.name
-    self.iconImageView.image = UIImage(named: setting.imageName)
+    self.iconImageView.image = UIImage(named: setting.imageName)?.withRenderingMode(.alwaysTemplate)
   }
   
 }
