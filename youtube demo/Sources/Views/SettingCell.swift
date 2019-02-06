@@ -12,6 +12,10 @@ final class SettingCell: BaseCell {
   
   // MARK: Constants
   
+  struct Font {
+    static let nameLabel = UIFont.systemFont(ofSize: 13)
+  }
+  
   struct Metric {
     static let iconImageViewInset = 8.f
   }
@@ -20,6 +24,7 @@ final class SettingCell: BaseCell {
   
   private let nameLabel = UILabel().then {
     $0.text = "Setting"
+    $0.font = Font.nameLabel
   }
   private let iconImageView = UIImageView().then {
     $0.image = UIImage(named: "settings")
