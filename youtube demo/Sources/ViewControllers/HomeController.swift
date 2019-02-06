@@ -58,6 +58,8 @@ final class HomeController: UICollectionViewController {
       $0.textColor = .white
     }
     self.navigationItem.titleView = titleLabel
+    
+    self.navigationController?.hidesBarsOnSwipe = true
   }
   
   private func setupNavBarButtons() {
@@ -83,7 +85,8 @@ final class HomeController: UICollectionViewController {
   private func setupMenuBar() {
     self.view.addSubview(self.menubar)
     self.menubar.snp.makeConstraints { (make) in
-      make.top.width.equalToSuperview()
+      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+      make.width.equalToSuperview()
       make.height.equalTo(Metric.menuBarHeight)
     }
   }
