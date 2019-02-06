@@ -20,6 +20,9 @@ final class HomeController: UICollectionViewController {
   
   // MARK: UI
   
+  private let redBackgroundView = UIView().then {
+    $0.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+  }
   private let menubar = MenuBar()
   
   // MARK: Constants
@@ -83,6 +86,12 @@ final class HomeController: UICollectionViewController {
   }
   
   private func setupMenuBar() {
+    self.view.addSubview(self.redBackgroundView)
+    self.redBackgroundView.snp.makeConstraints { (make) in
+      make.top.width.equalToSuperview()
+      make.height.equalTo(Metric.menuBarHeight)
+    }
+    
     self.view.addSubview(self.menubar)
     self.menubar.snp.makeConstraints { (make) in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
