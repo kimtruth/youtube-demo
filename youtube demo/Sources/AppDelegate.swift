@@ -36,6 +36,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     self.window = window
     
+    let statusBarBackgroundView = UIView().then {
+      $0.backgroundColor = UIColor.rgb(red: 194, green: 31, blue: 31)
+    }
+    let height = application.statusBarFrame.height
+    
+    self.window?.addSubview(statusBarBackgroundView)
+    statusBarBackgroundView.snp.makeConstraints { (make) in
+      make.top.left.right.equalToSuperview()
+      make.height.equalTo(height)
+    }
+    
     return true
   }
 
