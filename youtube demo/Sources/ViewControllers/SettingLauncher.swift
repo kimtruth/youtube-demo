@@ -18,6 +18,7 @@ final class SettingLauncher: NSObject {
   
   private struct Metric {
     static let collectionViewHeight = 300.f
+    static let cellHeight = 50.f
   }
   private struct Constant {
     static let animationDuration = 0.2
@@ -44,7 +45,7 @@ final class SettingLauncher: NSObject {
     self.collectionView.delegate = self
     self.collectionView.dataSource = self
     
-    self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellId)
+    self.collectionView.register(SettingCell.self, forCellWithReuseIdentifier: self.cellId)
   }
   
   func showSettings() {
@@ -96,7 +97,7 @@ extension SettingLauncher: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! SettingCell
     
     return cell
   }
@@ -105,5 +106,7 @@ extension SettingLauncher: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension SettingLauncher: UICollectionViewDelegateFlowLayout {
-  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return .init(width: self.collectionView.frame.width, height: Metric.cellHeight)
+  }
 }

@@ -15,5 +15,6 @@ final class SettingCell: BaseCell {
   override func setupViews() {
     super.setupViews()
     
+    self.backgroundColor = .blue
   }
 }
