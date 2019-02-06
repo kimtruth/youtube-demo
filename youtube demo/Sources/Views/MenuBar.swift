@@ -8,12 +8,25 @@
 
 import UIKit
 
+import SnapKit
+
 final class MenuBar: UIView {
   
   // MARK: Properties
   
   private let cellId = "MenuCell"
   private let imageNames = ["home", "trending", "subscriptions", "account"]
+  private var leftConstraint: Constraint?
+  
+  // MARK: Constants
+  
+  private struct Constant {
+    static let animationDuration = 0.25
+  }
+  
+  private struct Metric {
+    static let horizontalBarViewHeight = 4.f
+  }
   
   // MARK: UI
   
@@ -25,17 +38,17 @@ final class MenuBar: UIView {
     $0.dataSource = self
     $0.delegate = self
   }
+  private let horizontalBarView = UIView().then {
+    $0.backgroundColor = UIColor(white: 0.95, alpha: 1)
+  }
   
   // MARK: Initializing
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    self.addSubview(self.collectionView)
-    self.collectionView.register(MenuCell.self, forCellWithReuseIdentifier: self.cellId)
-    self.collectionView.snp.makeConstraints { (make) in
-      make.edges.equalToSuperview()
-    }
+    self.setupCollectionView()
+    self.setupHorizontalBarView()
     
     /// default page: home
     let selectedIndexPath = IndexPath(item: 0, section: 0)
@@ -46,6 +59,25 @@ final class MenuBar: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: Setups
+  
+  private func setupCollectionView() {
+    self.addSubview(self.collectionView)
+    self.collectionView.register(MenuCell.self, forCellWithReuseIdentifier: self.cellId)
+    self.collectionView.snp.makeConstraints { (make) in
+      make.edges.equalToSuperview()
+    }
+  }
+  
+  private func setupHorizontalBarView() {
+    self.addSubview(self.horizontalBarView)
+    self.horizontalBarView.snp.makeConstraints { (make) in
+      self.leftConstraint = make.left.equalToSuperview().constraint
+      make.bottom.equalToSuperview()
+      make.width.equalToSuperview().multipliedBy(1 / Float(self.imageNames.count))
+      make.height.equalTo(Metric.horizontalBarViewHeight)
+    }
+  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -76,5 +108,14 @@ extension MenuBar: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = self.frame.width / CGFloat(self.imageNames.count)
     return .init(width: width, height: self.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let x = CGFloat(indexPath.item) * self.collectionView.frame.width / CGFloat(self.imageNames.count)
+    self.leftConstraint?.update(offset: x)
+
+    UIView.animate(withDuration: Constant.animationDuration, delay: 0, options: .curveEaseOut, animations: {
+      self.layoutIfNeeded()
+    })
   }
 }

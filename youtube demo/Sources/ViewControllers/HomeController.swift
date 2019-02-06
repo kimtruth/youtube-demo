@@ -95,7 +95,7 @@ final class HomeController: UICollectionViewController {
     self.view.addSubview(self.menubar)
     self.menubar.snp.makeConstraints { (make) in
       make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-      make.width.equalToSuperview()
+      make.left.right.equalToSuperview()
       make.height.equalTo(Metric.menuBarHeight)
     }
   }
