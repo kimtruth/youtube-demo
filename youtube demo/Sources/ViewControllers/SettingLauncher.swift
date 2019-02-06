@@ -13,12 +13,19 @@ final class SettingLauncher: NSObject {
   // MARK: Properties
   
   private let cellId = "SettingCell"
+  private let settings = [
+    Setting(name: "Settings", imageName: "settings"),
+    Setting(name: "Terms & privacy policy", imageName: "privacy"),
+    Setting(name: "Send Feedback", imageName: "feedback"),
+    Setting(name: "Help", imageName: "help"),
+    Setting(name: "Switch Account", imageName: "switch_account"),
+    Setting(name: "Cancel", imageName: "cancel"),
+  ]
   
   // MARK: Constants
   
   private struct Metric {
     static let collectionViewHeight = 300.f
-    static let cellHeight = 50.f
   }
   private struct Constant {
     static let animationDuration = 0.2
@@ -93,11 +100,14 @@ final class SettingLauncher: NSObject {
 extension SettingLauncher: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return self.settings.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! SettingCell
+    let setting = self.settings[indexPath.item]
+    
+    cell.configure(setting: setting)
     
     return cell
   }
@@ -107,6 +117,12 @@ extension SettingLauncher: UICollectionViewDataSource {
 
 extension SettingLauncher: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return .init(width: self.collectionView.frame.width, height: Metric.cellHeight)
+    let height = Metric.collectionViewHeight / CGFloat(self.settings.count)
+    
+    return .init(width: self.collectionView.frame.width, height: height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
   }
 }

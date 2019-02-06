@@ -10,6 +10,12 @@ import UIKit
 
 final class SettingCell: BaseCell {
   
+  // MARK: Constants
+  
+  struct Metric {
+    static let iconImageViewInset = 8.f
+  }
+  
   // MARK: UI
   
   private let nameLabel = UILabel().then {
@@ -24,18 +30,25 @@ final class SettingCell: BaseCell {
   override func setupViews() {
     super.setupViews()
     
-    self.backgroundColor = .lightGray
     self.addSubview(self.nameLabel)
     self.addSubview(self.iconImageView)
     
     
     self.nameLabel.snp.makeConstraints { (make) in
-      make.left.equalTo(self.iconImageView.snp.right)
+      make.left.equalTo(self.iconImageView.snp.right).offset(Metric.iconImageViewInset)
       make.top.right.bottom.equalToSuperview()
     }
     self.iconImageView.snp.makeConstraints { (make) in
-      make.top.left.bottom.equalToSuperview()
+      make.top.left.bottom.equalToSuperview().inset(Metric.iconImageViewInset)
       make.width.equalTo(self.iconImageView.snp.height)
     }
   }
+  
+  // MARK: Configuring
+  
+  func configure(setting: Setting) {
+    self.nameLabel.text = setting.name
+    self.iconImageView.image = UIImage(named: setting.imageName)
+  }
+  
 }
