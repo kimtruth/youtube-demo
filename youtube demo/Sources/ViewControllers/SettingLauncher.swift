@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class SettingLauncher {
+final class SettingLauncher: NSObject {
+  
+  // MARK: Properties
+  
+  private let cellId = "SettingCell"
   
   // MARK: Constants
   
@@ -30,6 +34,17 @@ final class SettingLauncher {
     collectionViewLayout: UICollectionViewFlowLayout()
   ).then {
       $0.backgroundColor = .white
+  }
+  
+  // MARK: Initializing
+  
+  override init() {
+    super.init()
+    
+    self.collectionView.delegate = self
+    self.collectionView.dataSource = self
+    
+    self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: self.cellId)
   }
   
   func showSettings() {
@@ -70,4 +85,25 @@ final class SettingLauncher {
       self.collectionView.removeFromSuperview()
     }
   }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension SettingLauncher: UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath)
+    
+    return cell
+  }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension SettingLauncher: UICollectionViewDelegateFlowLayout {
+  
 }
