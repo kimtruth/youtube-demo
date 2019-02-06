@@ -11,7 +11,7 @@ import UIKit
 final class SettingLauncher: NSObject {
   
   // MARK: Properties
-  
+  var homeController: HomeController?
   private let cellId = "SettingCell"
   private let settings = [
     Setting(name: "Settings", imageName: "settings"),
@@ -41,7 +41,7 @@ final class SettingLauncher: NSObject {
     frame: .zero,
     collectionViewLayout: UICollectionViewFlowLayout()
   ).then {
-      $0.backgroundColor = .white
+    $0.backgroundColor = .white
   }
   
   // MARK: Initializing
@@ -62,7 +62,7 @@ final class SettingLauncher: NSObject {
     
     self.blackView.frame = window.frame
     
-    let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.blackViewDidTap))
+    let recognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismiss))
     self.blackView.addGestureRecognizer(recognizer)
     
     self.collectionView.frame = .init(
@@ -82,7 +82,7 @@ final class SettingLauncher: NSObject {
   
   // MARK: Actions
   
-  @objc private func blackViewDidTap() {
+  @objc private func dismiss(completion: (()-> Void)? = nil) {
     UIView.animate(withDuration: Constant.animationDuration, delay: 0, options: .curveEaseIn, animations: {
       self.blackView.alpha = 0
       var frame = self.collectionView.frame
@@ -91,6 +91,8 @@ final class SettingLauncher: NSObject {
     }) { finished in
       self.blackView.removeFromSuperview()
       self.collectionView.removeFromSuperview()
+      
+      completion?()
     }
   }
 }
@@ -110,6 +112,16 @@ extension SettingLauncher: UICollectionViewDataSource {
     cell.configure(setting: setting)
     
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let setting = self.settings[indexPath.item]
+    self.dismiss {
+      // execute if not a cancel cell
+      if indexPath.item + 1 != self.settings.count {
+        self.homeController?.showController(setting: setting)
+      }
+    }
   }
 }
 

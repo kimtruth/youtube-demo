@@ -13,7 +13,9 @@ final class HomeController: UICollectionViewController {
   // MARK: Properties
   
   private let cellId = "VideoCell"
-  private let settingLauncher = SettingLauncher()
+  private lazy var settingLauncher = SettingLauncher().then {
+    $0.homeController = self
+  }
   private var videos: [Video]?
   
   // MARK: UI
@@ -127,6 +129,15 @@ final class HomeController: UICollectionViewController {
     self.settingLauncher.showSettings()
   }
   
+  func showController(setting: Setting) {
+    let vc = UIViewController().then {
+      $0.view.backgroundColor = .white
+      $0.navigationItem.title = setting.name
+    }
+    self.navigationController?.navigationBar.tintColor = .white
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+    self.navigationController?.pushViewController(vc, animated: true)
+  }
 }
 
 // MARK: - UICollectionViewDataSource
