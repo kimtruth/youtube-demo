@@ -121,7 +121,6 @@ final class HomeController: UICollectionViewController {
   // MARK: Actions
   
   @objc private func searchButtonDidTap() {
-    
   }
   
   @objc private func moreButtonDidTap() {

@@ -46,6 +46,7 @@ final class VideoCell: BaseCell {
     $0.image = UIImage(named: "taylor_swift_blank_space")
     $0.backgroundColor = .blue
     $0.contentMode = .scaleAspectFill
+    $0.layer.masksToBounds = true
   }
   private let userProfileImageView = CustomImageView().then {
     $0.image = UIImage(named: "taylor_swift_profile")
