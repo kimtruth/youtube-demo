@@ -12,6 +12,7 @@
 		98C22331220BEC0200470899 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C22330220BEC0200470899 /* FeedCell.swift */; };
 		98C22334220C069200470899 /* APIServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C22333220C069200470899 /* APIServiceType.swift */; };
 		98C22338220C072B00470899 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C22337220C072B00470899 /* FeedService.swift */; };
+		98C2233D220C0A2100470899 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2233C220C0A2100470899 /* Feed.swift */; };
 		98D8225F2205404B00B9E4F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D8225E2205404B00B9E4F3 /* AppDelegate.swift */; };
 		98D822612205404B00B9E4F3 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D822602205404B00B9E4F3 /* HomeController.swift */; };
 		98D822662205404D00B9E4F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98D822652205404D00B9E4F3 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		98C22330220BEC0200470899 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		98C22333220C069200470899 /* APIServiceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceType.swift; sourceTree = "<group>"; };
 		98C22337220C072B00470899 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; };
+		98C2233C220C0A2100470899 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		98D8225B2205404B00B9E4F3 /* youtube demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "youtube demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98D8225E2205404B00B9E4F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		98D822602205404B00B9E4F3 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		98C2233B220C0A1500470899 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				98C2233C220C0A2100470899 /* Feed.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
 		98D822522205404B00B9E4F3 = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				98D8225E2205404B00B9E4F3 /* AppDelegate.swift */,
+				98C2233B220C0A1500470899 /* Types */,
 				98D8228122056A4900B9E4F3 /* Models */,
 				98C22332220C05BA00470899 /* Services */,
 				98D822762205531100B9E4F3 /* Utils */,
@@ -332,6 +343,7 @@
 				98D822782205531E00B9E4F3 /* String+BoundingRect.swift in Sources */,
 				98D8227522054A9800B9E4F3 /* VideoCell.swift in Sources */,
 				98C22338220C072B00470899 /* FeedService.swift in Sources */,
+				98C2233D220C0A2100470899 /* Feed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
