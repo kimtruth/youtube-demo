@@ -57,26 +57,12 @@ final class FeedCell: BaseCell {
   // MARK: Networking
   
   private func fetchVideos() {
-    let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
-    guard let url = URL(string: urlString) else { return }
-    
-    URLSession.shared.dataTask(with: url) { (data, res, err) in
-      guard let data = data else { return }
+    FeedService.feed { [weak self] videos in
+      guard let `self` = self else { return }
       
-      let decoder = JSONDecoder()
-      decoder.keyDecodingStrategy = .convertFromSnakeCase
-      do {
-        let videos = try decoder.decode([Video].self, from: data)
-        print(videos)
-        
-        self.videos = videos
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
-      } catch let jsonErr {
-        print("json decode error:", jsonErr)
-      }
-      }.resume()
+      self.videos = videos
+      self.collectionView.reloadData()
+    }
   }
 }
 
