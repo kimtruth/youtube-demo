@@ -38,7 +38,6 @@ final class FeedCell: BaseCell {
     self.collectionView.dataSource = self
     self.collectionView.delegate = self
     
-    self.fetchVideos()
     self.setupCollectionView()
   }
   
@@ -56,13 +55,19 @@ final class FeedCell: BaseCell {
   
   // MARK: Networking
   
-  private func fetchVideos() {
-    FeedService.feed { [weak self] videos in
+  private func fetchVideos(page: Feed) {
+    FeedService.feed(page: page) { [weak self] videos in
       guard let `self` = self else { return }
       
       self.videos = videos
       self.collectionView.reloadData()
     }
+  }
+  
+  // MARK: Configuring
+  
+  func configure(page: Feed) {
+    self.fetchVideos(page: page)
   }
 }
 

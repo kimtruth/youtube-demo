@@ -9,9 +9,19 @@
 import UIKit
 
 struct FeedService: APIServiceType {
-  static func feed(completion: @escaping(([Video]) -> Void)) {
+  static func feed(page: Feed, completion: @escaping(([Video]) -> Void)) {
     
-    let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
+    var urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/"
+    
+    switch page {
+    case .home:
+      urlString += "home.json"
+    case .trending:
+      urlString += "trending.json"
+    case .subscriptions:
+      urlString += "subscriptions.json"
+    }
+    
     guard let url = URL(string: urlString) else { return }
     
     URLSession.shared.dataTask(with: url) { (data, res, err) in

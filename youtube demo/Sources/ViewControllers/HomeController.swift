@@ -173,6 +173,16 @@ extension HomeController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! FeedCell
     
+    if indexPath.item == 0 {
+      cell.configure(page: .home)
+    }
+    else if indexPath.item == 1 {
+      cell.configure(page: .trending)
+    }
+    else if indexPath.item == 2 {
+      cell.configure(page: .subscriptions)
+    }
+    
     return cell
   }
 }
