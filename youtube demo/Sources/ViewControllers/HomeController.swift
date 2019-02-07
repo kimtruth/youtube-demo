@@ -13,6 +13,7 @@ final class HomeController: UICollectionViewController {
   // MARK: Properties
   
   private let cellId = "FeedCell"
+  private let titles = ["Home", "Trending", "Subscriptions", "Account"]
   private lazy var settingLauncher = SettingLauncher().then {
     $0.homeController = self
   }
@@ -23,7 +24,9 @@ final class HomeController: UICollectionViewController {
   private let redBackgroundView = UIView().then {
     $0.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
   }
-  private let menubar = MenuBar()
+  private lazy var menubar = MenuBar().then {
+    $0.homeController = self
+  }
   
   // MARK: Constants
   
@@ -106,6 +109,12 @@ final class HomeController: UICollectionViewController {
     self.collectionView.backgroundColor = .white
     self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: self.cellId)
   }
+  
+  private func setTitleFor(index: Int) {
+    guard let titleLabel = self.navigationItem.titleView as? UILabel else { return }
+    
+    titleLabel.text = self.titles[index]
+  }
 
   // MARK: Actions
   
@@ -125,6 +134,32 @@ final class HomeController: UICollectionViewController {
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     self.navigationController?.pushViewController(vc, animated: true)
   }
+  
+  func scrollToMenu(index: Int) {
+    let indexPath = IndexPath(item: index, section: 0)
+    
+    self.setTitleFor(index: index)
+    self.collectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+  }
+  
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension HomeController {
+  
+  override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    let x = scrollView.contentOffset.x / CGFloat(self.titles.count)
+    self.menubar.updateBarLeftConstraint(x: x)
+  }
+  
+  override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    let index = Int(targetContentOffset.pointee.x / self.view.frame.width)
+    let indexPath = IndexPath(item: index, section: 0)
+    
+    self.setTitleFor(index: index)
+    self.menubar.selectItemAt(indexPath: indexPath)
+  }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -132,7 +167,7 @@ final class HomeController: UICollectionViewController {
 extension HomeController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 4
+    return self.titles.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

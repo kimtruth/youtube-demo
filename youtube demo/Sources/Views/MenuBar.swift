@@ -16,7 +16,8 @@ final class MenuBar: UIView {
   
   private let cellId = "MenuCell"
   private let imageNames = ["home", "trending", "subscriptions", "account"]
-  private var leftConstraint: Constraint?
+  private var barLeftConstraint: Constraint?
+  var homeController: HomeController?
   
   // MARK: Constants
   
@@ -72,11 +73,21 @@ final class MenuBar: UIView {
   private func setupHorizontalBarView() {
     self.addSubview(self.horizontalBarView)
     self.horizontalBarView.snp.makeConstraints { (make) in
-      self.leftConstraint = make.left.equalToSuperview().constraint
+      self.barLeftConstraint = make.left.equalToSuperview().constraint
       make.bottom.equalToSuperview()
       make.width.equalToSuperview().multipliedBy(1 / Float(self.imageNames.count))
       make.height.equalTo(Metric.horizontalBarViewHeight)
     }
+  }
+  
+  // MARK: Actions
+  
+  func updateBarLeftConstraint(x: CGFloat) {
+    self.barLeftConstraint?.update(offset: x)
+  }
+  
+  func selectItemAt(indexPath: IndexPath) {
+    self.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
   }
 }
 
@@ -111,11 +122,6 @@ extension MenuBar: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let x = CGFloat(indexPath.item) * self.collectionView.frame.width / CGFloat(self.imageNames.count)
-    self.leftConstraint?.update(offset: x)
-
-    UIView.animate(withDuration: Constant.animationDuration, delay: 0, options: .curveEaseOut, animations: {
-      self.layoutIfNeeded()
-    })
+    self.homeController?.scrollToMenu(index: indexPath.item)
   }
 }
