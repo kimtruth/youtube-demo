@@ -12,7 +12,7 @@ final class HomeController: UICollectionViewController {
 
   // MARK: Properties
   
-  private let cellId = "VideoCell"
+  private let cellId = "FeedCell"
   private lazy var settingLauncher = SettingLauncher().then {
     $0.homeController = self
   }
@@ -30,17 +30,15 @@ final class HomeController: UICollectionViewController {
   private struct Font {
     static let titleLabel = UIFont.boldSystemFont(ofSize: 20)
   }
-  
   private struct Metric {
     static let menuBarHeight = 50.f
   }
+  
   
   // MARK: View Life Cycles
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.fetchVideos()
     
     self.setupNavBar()
     self.setupNavBarButtons()
@@ -101,35 +99,12 @@ final class HomeController: UICollectionViewController {
   }
   
   private func setupCollectionView() {
+    if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      layout.scrollDirection = .horizontal
+    }
+    self.collectionView.isPagingEnabled = true
     self.collectionView.backgroundColor = .white
-    self.collectionView.register(VideoCell.self, forCellWithReuseIdentifier: self.cellId)
-    self.collectionView.contentInset = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
-    self.collectionView.scrollIndicatorInsets = .init(top: Metric.menuBarHeight, left: 0, bottom: 0, right: 0)
-  }
-  
-  // MARK: Networking
-  
-  private func fetchVideos() {
-    let urlString = "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json"
-    guard let url = URL(string: urlString) else { return }
-    
-    URLSession.shared.dataTask(with: url) { (data, res, err) in
-      guard let data = data else { return }
-      
-      let decoder = JSONDecoder()
-      decoder.keyDecodingStrategy = .convertFromSnakeCase
-      do {
-        let videos = try decoder.decode([Video].self, from: data)
-        print(videos)
-        
-        self.videos = videos
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
-      } catch let jsonErr {
-        print("json decode error:", jsonErr)
-      }
-    }.resume()
+    self.collectionView.register(FeedCell.self, forCellWithReuseIdentifier: self.cellId)
   }
 
   // MARK: Actions
@@ -157,14 +132,12 @@ final class HomeController: UICollectionViewController {
 extension HomeController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return self.videos?.count ?? 0
+    return 4
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! VideoCell
-    if let video = self.videos?[indexPath.item] {
-      cell.configure(video: video)
-    }
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellId, for: indexPath) as! FeedCell
+    
     return cell
   }
 }
@@ -174,7 +147,10 @@ extension HomeController {
 extension HomeController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
-    return VideoCell.size(width: self.view.frame.width, title: "Taylor Swift - Blank Space")
+    return .init(width: self.view.frame.width, height: self.view.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
   }
 }
