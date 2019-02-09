@@ -96,4 +96,9 @@ extension FeedCell: UICollectionViewDelegateFlowLayout {
     
     return VideoCell.size(width: self.frame.width, title: "Taylor Swift - Blank Space")
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let videoLauncher = VideoLauncher()
+    videoLauncher.showVideoPlayer()
+  }
 }
