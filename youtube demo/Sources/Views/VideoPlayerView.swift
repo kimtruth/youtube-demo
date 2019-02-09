@@ -11,6 +11,16 @@ import AVFoundation
 
 final class VideoPlayerView: UIView {
   
+  // MARK: UI
+  
+  private let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge).then {
+    $0.startAnimating()
+  }
+  
+  private let controlsContainerView = UIView().then {
+    $0.backgroundColor = UIColor(white: 0, alpha: 0.5)
+  }
+  
   // MARK: Initializing
   
   override init(frame: CGRect) {
@@ -18,6 +28,17 @@ final class VideoPlayerView: UIView {
     
     self.backgroundColor = .black
     
+    self.setupPlayer()
+    self.setupControls()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  // MARK: Setups
+  
+  private func setupPlayer() {
     let urlString = "http://techslides.com/demos/sample-videos/small.mp4"
     
     guard let url = URL(string: urlString) else { return }
@@ -30,7 +51,13 @@ final class VideoPlayerView: UIView {
     player.play()
   }
   
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
+  private func setupControls() {
+    self.controlsContainerView.frame = self.frame
+    self.addSubview(self.controlsContainerView)
+    
+    self.controlsContainerView.addSubview(self.activityIndicatorView)
+    self.activityIndicatorView.snp.makeConstraints { (make) in
+      make.centerX.centerY.equalToSuperview()
+    }
   }
 }
