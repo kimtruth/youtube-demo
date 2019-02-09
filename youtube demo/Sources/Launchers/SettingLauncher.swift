@@ -11,6 +11,7 @@ import UIKit
 final class SettingLauncher: NSObject {
   
   // MARK: Properties
+  
   var homeController: HomeController?
   private let cellId = "SettingCell"
   private let settings = [
