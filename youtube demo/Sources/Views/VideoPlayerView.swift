@@ -47,6 +47,7 @@ final class VideoPlayerView: UIView {
     
     self.layer.addSublayer(playerLayer)
     playerLayer.frame = self.frame
+    player.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.loadedTimeRanges), options: .new, context: nil)
     
     player.play()
   }
@@ -58,6 +59,14 @@ final class VideoPlayerView: UIView {
     self.controlsContainerView.addSubview(self.activityIndicatorView)
     self.activityIndicatorView.snp.makeConstraints { (make) in
       make.centerX.centerY.equalToSuperview()
+    }
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    
+    if keyPath == #keyPath(AVPlayer.currentItem.loadedTimeRanges) {
+      self.activityIndicatorView.stopAnimating()
+      self.controlsContainerView.backgroundColor = .clear
     }
   }
 }
