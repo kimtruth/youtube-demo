@@ -57,7 +57,7 @@ final class FeedCell: BaseCell {
   
   private func fetchVideos(page: Feed) {
     FeedService.feed(page: page) { [weak self] videos in
-      guard let `self` = self else { return }
+      guard let self = self else { return }
       
       self.videos = videos
       self.collectionView.reloadData()

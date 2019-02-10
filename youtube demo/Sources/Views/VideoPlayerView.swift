@@ -20,6 +20,9 @@ final class VideoPlayerView: UIView {
   
   private struct Metric {
     static let pauseButtonSize = 50.f
+    static let lengthLabelRight = -8.f
+    static let lengthLabelWidth = 60.f
+    static let lengthLabelHeight = 24.f
   }
   
   // MARK: UI
@@ -35,6 +38,12 @@ final class VideoPlayerView: UIView {
     $0.setImage(UIImage(named: "pause"), for: .normal)
     $0.tintColor = .white
     $0.isHidden = true
+  }
+  private let lengthLabel = UILabel().then {
+    $0.text = "00:00"
+    $0.textColor = .white
+    $0.textAlignment = .right
+    $0.font = .boldSystemFont(ofSize: 14)
   }
   
   // MARK: Initializing
@@ -74,6 +83,7 @@ final class VideoPlayerView: UIView {
     
     self.addSubview(self.controlsContainerView)
     self.addSubview(self.controlButton)
+    self.addSubview(self.lengthLabel)
     
     self.activityIndicatorView.snp.makeConstraints { (make) in
       make.centerX.centerY.equalToSuperview()
@@ -81,6 +91,12 @@ final class VideoPlayerView: UIView {
     self.controlButton.snp.makeConstraints { (make) in
       make.width.height.equalTo(Metric.pauseButtonSize)
       make.centerX.centerY.equalToSuperview()
+    }
+    self.lengthLabel.snp.makeConstraints { (make) in
+      make.right.equalToSuperview().offset(Metric.lengthLabelRight)
+      make.bottom.equalToSuperview()
+      make.width.equalTo(Metric.lengthLabelWidth)
+      make.height.equalTo(Metric.lengthLabelHeight)
     }
   }
   

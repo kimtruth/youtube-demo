@@ -37,7 +37,6 @@ final class HomeController: UICollectionViewController {
     static let menuBarHeight = 50.f
   }
   
-  
   // MARK: View Life Cycles
   
   override func viewDidLoad() {
