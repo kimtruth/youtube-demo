@@ -65,6 +65,7 @@ final class VideoPlayerView: UIView {
     
     self.setupPlayer()
     self.setupControls()
+    self.setupGradientLayer()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -85,6 +86,16 @@ final class VideoPlayerView: UIView {
     self.player?.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.loadedTimeRanges), options: .new, context: nil)
     
     self.player?.play()
+  }
+  
+  private func setupGradientLayer() {
+    let gradientLayer = CAGradientLayer()
+    gradientLayer.frame = self.bounds
+    
+    gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+    gradientLayer.locations = [0.7, 1.2]
+    
+    self.controlsContainerView.layer.addSublayer(gradientLayer)
   }
   
   private func setupControls() {
@@ -136,7 +147,7 @@ final class VideoPlayerView: UIView {
     let time = CMTime(seconds: seconds, preferredTimescale: 1)
     
     self.player?.seek(to: time, completionHandler: { (finished) in
-      print(finished)
+      
     })
   }
   
