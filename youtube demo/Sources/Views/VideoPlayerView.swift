@@ -137,6 +137,15 @@ final class VideoPlayerView: UIView {
       self.controlsContainerView.backgroundColor = .clear
       self.controlButton.isHidden = false
       self.isPlaying = true
+      
+      if let duration = self.player?.currentItem?.duration {
+        let totalSeconds = Int(duration.seconds)
+        
+        let seconds = totalSeconds % 60
+        let minutes = totalSeconds / 60
+        
+        self.lengthLabel.text = String(format: "%02d:%02d", minutes, seconds)
+      }
     }
   }
 }
