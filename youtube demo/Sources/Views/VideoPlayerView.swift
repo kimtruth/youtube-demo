@@ -20,9 +20,12 @@ final class VideoPlayerView: UIView {
   
   private struct Metric {
     static let pauseButtonSize = 50.f
+    
     static let lengthLabelRight = -8.f
     static let lengthLabelWidth = 60.f
     static let lengthLabelHeight = 24.f
+    
+    static let sliderHeight = 30.f
   }
   
   // MARK: UI
@@ -45,6 +48,7 @@ final class VideoPlayerView: UIView {
     $0.textAlignment = .right
     $0.font = .boldSystemFont(ofSize: 14)
   }
+  private let slider = UISlider()
   
   // MARK: Initializing
   
@@ -84,6 +88,7 @@ final class VideoPlayerView: UIView {
     self.addSubview(self.controlsContainerView)
     self.addSubview(self.controlButton)
     self.addSubview(self.lengthLabel)
+    self.addSubview(self.slider)
     
     self.activityIndicatorView.snp.makeConstraints { (make) in
       make.centerX.centerY.equalToSuperview()
@@ -97,6 +102,11 @@ final class VideoPlayerView: UIView {
       make.bottom.equalToSuperview()
       make.width.equalTo(Metric.lengthLabelWidth)
       make.height.equalTo(Metric.lengthLabelHeight)
+    }
+    self.slider.snp.makeConstraints { (make) in
+      make.left.bottom.equalToSuperview()
+      make.right.equalTo(self.lengthLabel.snp.left)
+      make.height.equalTo(Metric.sliderHeight)
     }
   }
   
