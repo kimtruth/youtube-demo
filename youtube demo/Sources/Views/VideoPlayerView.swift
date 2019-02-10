@@ -48,7 +48,12 @@ final class VideoPlayerView: UIView {
     $0.textAlignment = .right
     $0.font = .boldSystemFont(ofSize: 14)
   }
-  private let slider = UISlider()
+  private let slider = UISlider().then {
+    $0.minimumTrackTintColor = .red
+    $0.maximumTrackTintColor = .white
+    $0.thumbTintColor = .red
+    $0.setThumbImage(UIImage(named: "thumb"), for: .normal)
+  }
   
   // MARK: Initializing
   
