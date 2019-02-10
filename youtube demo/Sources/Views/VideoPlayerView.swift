@@ -48,11 +48,12 @@ final class VideoPlayerView: UIView {
     $0.textAlignment = .right
     $0.font = .boldSystemFont(ofSize: 14)
   }
-  private let slider = UISlider().then {
+  private lazy var slider = UISlider().then {
     $0.minimumTrackTintColor = .red
     $0.maximumTrackTintColor = .white
     $0.thumbTintColor = .red
     $0.setThumbImage(UIImage(named: "thumb"), for: .normal)
+    $0.addTarget(self, action: #selector(self.sliderDidChangedValue), for: .valueChanged)
   }
   
   // MARK: Initializing
@@ -126,6 +127,17 @@ final class VideoPlayerView: UIView {
       self.controlButton.setImage(UIImage(named: "pause"), for: .normal)
     }
     self.isPlaying = !self.isPlaying
+  }
+  
+  @objc private func sliderDidChangedValue() {
+    guard let duration = self.player?.currentItem?.duration else { return }
+    
+    let seconds = duration.seconds * Double(self.slider.value)
+    let time = CMTime(seconds: seconds, preferredTimescale: 1)
+    
+    self.player?.seek(to: time, completionHandler: { (finished) in
+      print(finished)
+    })
   }
   
   // MARK: Observings
