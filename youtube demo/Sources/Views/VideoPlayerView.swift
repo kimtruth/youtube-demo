@@ -25,6 +25,10 @@ final class VideoPlayerView: UIView {
     static let lengthLabelWidth = 60.f
     static let lengthLabelHeight = 24.f
     
+    static let currentTimeLabelLeft = 8.f
+    static let currentTimeLabelWidth = 60.f
+    static let currentTimeLabelHeight = 24.f
+    
     static let sliderHeight = 30.f
   }
   
@@ -46,6 +50,12 @@ final class VideoPlayerView: UIView {
     $0.text = "00:00"
     $0.textColor = .white
     $0.textAlignment = .right
+    $0.font = .boldSystemFont(ofSize: 14)
+  }
+  private let currentTimeLabel = UILabel().then {
+    $0.text = "00:00"
+    $0.textColor = .white
+    $0.textAlignment = .left
     $0.font = .boldSystemFont(ofSize: 14)
   }
   private lazy var slider = UISlider().then {
@@ -86,6 +96,20 @@ final class VideoPlayerView: UIView {
     self.player?.addObserver(self, forKeyPath: #keyPath(AVPlayer.currentItem.loadedTimeRanges), options: .new, context: nil)
     
     self.player?.play()
+    
+    let interval = CMTime(value: 1, timescale: 2)
+    self.player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] (time) in
+      guard let self = self else { return }
+      guard let duration = self.player?.currentItem?.duration else { return }
+      
+      let nowSeconds = Int(time.seconds)
+      
+      let seconds = nowSeconds % 60
+      let minutes = nowSeconds / 60
+      
+      self.currentTimeLabel.text = String(format: "%02d:%02d", minutes, seconds)
+      self.slider.value = Float(time.seconds / duration.seconds)
+    })
   }
   
   private func setupGradientLayer() {
@@ -105,6 +129,7 @@ final class VideoPlayerView: UIView {
     self.addSubview(self.controlsContainerView)
     self.addSubview(self.controlButton)
     self.addSubview(self.lengthLabel)
+    self.addSubview(self.currentTimeLabel)
     self.addSubview(self.slider)
     
     self.activityIndicatorView.snp.makeConstraints { (make) in
@@ -120,9 +145,16 @@ final class VideoPlayerView: UIView {
       make.width.equalTo(Metric.lengthLabelWidth)
       make.height.equalTo(Metric.lengthLabelHeight)
     }
+    self.currentTimeLabel.snp.makeConstraints { (make) in
+      make.left.equalToSuperview().offset(Metric.currentTimeLabelLeft)
+      make.bottom.equalToSuperview()
+      make.width.equalTo(Metric.currentTimeLabelWidth)
+      make.height.equalTo(Metric.currentTimeLabelHeight)
+    }
     self.slider.snp.makeConstraints { (make) in
-      make.left.bottom.equalToSuperview()
+      make.left.equalTo(self.currentTimeLabel.snp.right)
       make.right.equalTo(self.lengthLabel.snp.left)
+      make.bottom.equalToSuperview()
       make.height.equalTo(Metric.sliderHeight)
     }
   }
