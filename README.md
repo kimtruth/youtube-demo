@@ -6,6 +6,7 @@ Just for practice.
 
 - UICollectionView
 - CustomCollectionViewCell
+- Image Caching (NSCache)
 - json parsing (JSONDecoder)
 - HTTP request (URLSession)
 - AVPlayer (AVFoundation)
